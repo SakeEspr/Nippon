@@ -1,0 +1,16 @@
+{
+  "Hiragana": {
+    "wrong": []
+  },
+  "Katakana": {
+    "wrong": []
+  },
+  "Both": {
+    "wrong": []
+  },
+  "Vocabulary": {
+    "wrong": []
+  },
+  "test_type": "multiple_choice",
+  "current_theme": "Ocean"
+}
