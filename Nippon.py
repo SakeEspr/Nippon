@@ -3,10 +3,13 @@ Japanese Learning App — Kana, Vocabulary & Sentence Structure
 Tabs:
 1. Kana Practice (Hiragana, Katakana, Both)
 2. Vocabulary Study (100+ words with example sentences)
-3. Sentence Structure (Grammar patterns and construction)
+3. Sentence Structure (Grammar patterns)
 
-Features: Multiple choice/typing modes, themed UI with presets
-Run this in VSCode with Python 3.7+.
+Features:
+* Typing / Multiple-choice
+* Themed UI
+* Desktop & Mobile layout toggle (saved)
+Run in VSCode with Python 3.7+.
 """
 
 import tkinter as tk
@@ -146,9 +149,59 @@ THEMES = {
     'Mint': {'bg': '#e0f2f1', 'fg': '#004d40', 'accent': '#00897b', 'success': '#43a047', 'error': '#e53935', 'card_bg': '#b2dfdb', 'btn_bg': '#80cbc4'},
 }
 
+# ──────────────────────────────────────────────────────────────
+# Layout Profiles (Desktop vs Mobile)
+# ──────────────────────────────────────────────────────────────
+LAYOUTS = {
+    "Computer": {
+        "font_kana": ("Helvetica", 80, "bold"),
+        "font_vocab": ("Helvetica", 48, "bold"),
+        "font_example_jp": ("Helvetica", 13),
+        "font_example_romaji": ("Helvetica", 9, "italic"),
+        "font_pattern_title": ("Helvetica", 16, "bold"),
+        "font_pattern_romaji": ("Helvetica", 11, "italic"),
+        "font_pattern_meaning": ("Helvetica", 11),
+        "font_explanation": ("Helvetica", 10),
+        "font_example_label": ("Helvetica", 10, "bold"),
+        "font_example_jp": ("Helvetica", 16, "bold"),
+        "font_example_romaji": ("Helvetica", 11, "italic"),
+        "font_example_eng": ("Helvetica", 11),
+        "padx": 15, "pady": 5,
+        "btn_padx": 20, "btn_pady": 6,
+        "entry_font": ("Helvetica", 16),
+        "mc_btn_font": ("Helvetica", 14, "bold"),
+        "mc_btn_width": 15,
+        "scrollbar": True,
+        "wraplength": 650,
+    },
+    "Mobile": {
+        "font_kana": ("Helvetica", 100, "bold"),
+        "font_vocab": ("Helvetica", 60, "bold"),
+        "font_example_jp": ("Helvetica", 16),
+        "font_example_romaji": ("Helvetica", 11, "italic"),
+        "font_pattern_title": ("Helvetica", 20, "bold"),
+        "font_pattern_romaji": ("Helvetica", 14, "italic"),
+        "font_pattern_meaning": ("Helvetica", 14),
+        "font_explanation": ("Helvetica", 13),
+        "font_example_label": ("Helvetica", 13, "bold"),
+        "font_example_jp": ("Helvetica", 20, "bold"),
+        "font_example_romaji": ("Helvetica", 14, "italic"),
+        "font_example_eng": ("Helvetica", 14),
+        "padx": 10, "pady": 10,
+        "btn_padx": 30, "btn_pady": 12,
+        "entry_font": ("Helvetica", 20),
+        "mc_btn_font": ("Helvetica", 18, "bold"),
+        "mc_btn_width": 0,  # fill full width
+        "scrollbar": False,
+        "wraplength": 500,
+    }
+}
+
 PROGRESS_FILE = 'japanese_progress.json'
 
-
+# ──────────────────────────────────────────────────────────────
+# Helper Functions
+# ──────────────────────────────────────────────────────────────
 def build_pool(mode):
     if mode == 'Hiragana':
         return list(HIRAGANA.items())
@@ -156,7 +209,6 @@ def build_pool(mode):
         return list(KATAKANA.items())
     else:
         return list({**HIRAGANA, **KATAKANA}.items())
-
 
 def load_progress():
     if os.path.exists(PROGRESS_FILE):
@@ -167,11 +219,9 @@ def load_progress():
             return {}
     return {}
 
-
 def save_progress(data):
     with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-
 
 # ──────────────────────────────────────────────────────────────
 # Main App
@@ -182,7 +232,7 @@ class JapaneseTrainer(tk.Tk):
         self.title('Japanese Learning Trainer')
         self.geometry('850x650')
         self.resizable(True, True)
-        self.minsize(700, 500)
+        self.minsize(320, 500)
 
         self.progress = load_progress()
         self.progress.setdefault('Hiragana', {'wrong': []})
@@ -191,12 +241,15 @@ class JapaneseTrainer(tk.Tk):
         self.progress.setdefault('Vocabulary', {'wrong': []})
         self.progress.setdefault('test_type', 'typing')
         self.progress.setdefault('current_theme', 'Classic')
+        self.progress.setdefault('device_mode', 'Computer')
 
         self.test_type = tk.StringVar(value=self.progress['test_type'])
         self.current_theme_name = self.progress['current_theme']
+        self.device_mode = tk.StringVar(value=self.progress['device_mode'])
         self.colors = THEMES[self.current_theme_name].copy()
+        self.layout = LAYOUTS[self.device_mode.get()].copy()
 
-        self.apply_theme()
+        self.apply_theme_and_layout()
 
         # ── Menu ─────────────────────────────────────
         menubar = tk.Menu(self)
@@ -205,6 +258,16 @@ class JapaneseTrainer(tk.Tk):
         settings_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label='Settings', menu=settings_menu)
         settings_menu.add_command(label='Choose Theme', command=self.open_theme_selector)
+
+        device_menu = tk.Menu(settings_menu, tearoff=0)
+        settings_menu.add_cascade(label='Device Mode', menu=device_menu)
+        for mode in ['Computer', 'Mobile']:
+            device_menu.add_radiobutton(
+                label=mode,
+                variable=self.device_mode,
+                value=mode,
+                command=lambda m=mode: self.set_device_mode(m)
+            )
 
         test_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label='Test Mode', menu=test_menu)
@@ -225,17 +288,33 @@ class JapaneseTrainer(tk.Tk):
         self.vocab_tab = tk.Frame(self.notebook, bg=self.colors['bg'])
         self.grammar_tab = tk.Frame(self.notebook, bg=self.colors['bg'])
 
-        self.notebook.add(self.kana_tab, text='Kana Practice')
-        self.notebook.add(self.vocab_tab, text='Vocabulary')
+        self.notebook.add(self.kana_tab, text='Kana')
+        self.notebook.add(self.vocab_tab, text='Vocab')
         self.notebook.add(self.grammar_tab, text='Grammar')
 
         self.init_kana_tab()
         self.init_vocab_tab()
         self.init_grammar_tab()
 
-    # ── Theme handling ─────────────────────────────────
-    def apply_theme(self):
+    # ── Theme & Layout ─────────────────────────────────
+    def apply_theme_and_layout(self):
         self.configure(bg=self.colors['bg'])
+        self.layout = LAYOUTS[self.device_mode.get()].copy()
+
+    def set_device_mode(self, mode):
+        self.device_mode.set(mode)
+        self.progress['device_mode'] = mode
+        save_progress(self.progress)
+        self.apply_theme_and_layout()
+        self.rebuild_all_tabs()
+
+    def rebuild_all_tabs(self):
+        for tab in (self.kana_tab, self.vocab_tab, self.grammar_tab):
+            for child in tab.winfo_children():
+                child.destroy()
+        self.init_kana_tab()
+        self.init_vocab_tab()
+        self.init_grammar_tab()
 
     def save_test_type(self):
         self.progress['test_type'] = self.test_type.get()
@@ -303,15 +382,16 @@ class JapaneseTrainer(tk.Tk):
         self.progress['current_theme'] = theme_name
         save_progress(self.progress)
         window.destroy()
-        messagebox.showinfo('Theme Applied',
-                            f'{theme_name} theme applied!\nRestart the app to see all changes.')
+        self.apply_theme_and_layout()
+        self.rebuild_all_tabs()
+        messagebox.showinfo('Theme Applied', f'{theme_name} theme applied!')
 
     # ── KANA TAB ───────────────────────────────────────
     def init_kana_tab(self):
+        L = self.layout
         self.mode = tk.StringVar(value='Hiragana')
         self.current = None
-        self.score = 0
-        self.asked = 0
+        self.score = self.asked = 0
         self.wrong_in_session = []
         self.answer_checked = False
         self.last_answer_correct = False
@@ -322,14 +402,14 @@ class JapaneseTrainer(tk.Tk):
 
         # Header
         header = tk.Frame(self.kana_tab, bg=self.colors['accent'], height=60)
-        header.pack(fill='x', pady=(0, 5))
+        header.pack(fill='x', pady=(0, L['pady']))
         header.pack_propagate(False)
         tk.Label(header, text='Kana Practice', font=('Helvetica', 16, 'bold'),
                  bg=self.colors['accent'], fg='white').pack(pady=15)
 
         # Control panel
         control_panel = tk.Frame(self.kana_tab, bg=self.colors['card_bg'], relief='raised', bd=2)
-        control_panel.pack(fill='x', padx=15, pady=5)
+        control_panel.pack(fill='x', padx=L['padx'], pady=L['pady'])
 
         tk.Label(control_panel, text='Choose Test:', font=('Helvetica', 10, 'bold'),
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack(side='left', padx=8, pady=8)
@@ -349,19 +429,18 @@ class JapaneseTrainer(tk.Tk):
 
         # Main card
         main_card = tk.Frame(self.kana_tab, bg=self.colors['card_bg'], relief='raised', bd=3)
-        main_card.pack(fill='both', expand=True, padx=15, pady=5)
+        main_card.pack(fill='both', expand=True, padx=L['padx'], pady=L['pady'])
 
-        self.kana_label = tk.Label(main_card, text='', font=('Helvetica', 80, 'bold'),
+        self.kana_label = tk.Label(main_card, text='', font=L['font_kana'],
                                    bg=self.colors['card_bg'], fg=self.colors['accent'])
         self.kana_label.pack(pady=20)
 
-        # ── Typing area ──
+        # Typing area
         self.typing_frame = tk.Frame(main_card, bg=self.colors['card_bg'])
-        self.typing_frame.pack(fill='x', padx=15, pady=5)
-
+        self.typing_frame.pack(fill='x', padx=20, pady=10)
         tk.Label(self.typing_frame, text='Type your answer:', font=('Helvetica', 10),
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack()
-        self.answer_entry = tk.Entry(self.typing_frame, font=('Helvetica', 16), justify='center',
+        self.answer_entry = tk.Entry(self.typing_frame, font=L['entry_font'], justify='center',
                                      bg='white', fg=self.colors['fg'], relief='solid', bd=2)
         self.answer_entry.pack(pady=8, fill='x', padx=40)
 
@@ -369,16 +448,16 @@ class JapaneseTrainer(tk.Tk):
         typing_btns.pack(pady=8)
         tk.Button(typing_btns, text='Check', font=('Helvetica', 10, 'bold'),
                   bg=self.colors['success'], fg='white', activebackground='#006400',
-                  relief='raised', bd=2, padx=20, pady=6,
+                  relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'],
                   command=self.check_answer).pack(side='left', padx=4)
 
-        # ── Multiple-choice area ──
+        # Multiple-choice area
         self.mc_frame = tk.Frame(main_card, bg=self.colors['card_bg'])
 
-        # ── Common next button (always visible) ──
+        # Next button
         self.next_btn = tk.Button(main_card, text='Next', font=('Helvetica', 10, 'bold'),
                                   bg=self.colors['accent'], fg='white', activebackground='#004080',
-                                  relief='raised', bd=2, padx=20, pady=6,
+                                  relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'],
                                   command=self.next_card)
         self.next_btn.pack(pady=8)
 
@@ -453,17 +532,17 @@ class JapaneseTrainer(tk.Tk):
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack(pady=8)
 
         for ch in choices:
-            btn = tk.Button(self.mc_frame, text=ch, font=('Helvetica', 14, 'bold'),
+            btn = tk.Button(self.mc_frame, text=ch, font=self.layout['mc_btn_font'],
                             bg='white', fg=self.colors['fg'],
                             activebackground=self.colors['accent'], activeforeground='white',
-                            relief='raised', bd=3, padx=25, pady=10, width=15,
+                            relief='raised', bd=3, padx=25, pady=10,
+                            width=self.layout['mc_btn_width'] if self.layout['mc_btn_width'] > 0 else None,
                             command=lambda c=ch: self.check_mc_answer(c))
-            btn.pack(pady=4)
+            btn.pack(pady=4, fill='x' if self.layout['mc_btn_width'] == 0 else 'none', padx=40 if self.layout['mc_btn_width'] == 0 else 0)
             self.mc_buttons.append(btn)
 
     def check_mc_answer(self, choice):
-        if self.answer_checked:
-            return
+        if self.answer_checked: return
         char, correct = self.current
         self.asked += 1
         self.answer_checked = True
@@ -491,8 +570,7 @@ class JapaneseTrainer(tk.Tk):
         self.update_stats()
 
     def check_answer(self):
-        if not self.current or self.answer_checked:
-            return
+        if not self.current or self.answer_checked: return
         user = self.answer_entry.get().strip().lower()
         char, correct = self.current
         self.asked += 1
@@ -526,6 +604,7 @@ class JapaneseTrainer(tk.Tk):
 
     # ── VOCABULARY TAB ───────────────────────────────────
     def init_vocab_tab(self):
+        L = self.layout
         self.vocab_mode = tk.StringVar(value='Study')
         self.current_vocab = None
         self.vocab_score = self.vocab_asked = 0
@@ -537,14 +616,14 @@ class JapaneseTrainer(tk.Tk):
 
         # Header
         header = tk.Frame(self.vocab_tab, bg=self.colors['accent'], height=60)
-        header.pack(fill='x', pady=(0, 5))
+        header.pack(fill='x', pady=(0, L['pady']))
         header.pack_propagate(False)
         tk.Label(header, text='Vocabulary Study', font=('Helvetica', 16, 'bold'),
                  bg=self.colors['accent'], fg='white').pack(pady=15)
 
         # Control panel
         control = tk.Frame(self.vocab_tab, bg=self.colors['card_bg'], relief='raised', bd=2)
-        control.pack(fill='x', padx=15, pady=5)
+        control.pack(fill='x', padx=L['padx'], pady=L['pady'])
 
         tk.Label(control, text='Mode:', font=('Helvetica', 10, 'bold'),
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack(side='left', padx=8, pady=8)
@@ -569,19 +648,20 @@ class JapaneseTrainer(tk.Tk):
 
         # Scrolling canvas
         canvas = tk.Canvas(self.vocab_tab, bg=self.colors['bg'], highlightthickness=0)
-        scrollbar = ttk.Scrollbar(self.vocab_tab, orient='vertical', command=canvas.yview)
+        scrollbar = ttk.Scrollbar(self.vocab_tab, orient='vertical', command=canvas.yview) if L['scrollbar'] else None
         self.vocab_display = tk.Frame(canvas, bg=self.colors['card_bg'])
 
-        canvas.configure(yscrollcommand=scrollbar.set)
-        scrollbar.pack(side='right', fill='y')
-        canvas.pack(side='left', fill='both', expand=True, padx=15, pady=5)
+        canvas.configure(yscrollcommand=scrollbar.set if scrollbar else None)
+        if scrollbar:
+            scrollbar.pack(side='right', fill='y')
+        canvas.pack(side='left', fill='both', expand=True, padx=L['padx'], pady=L['pady'])
 
         cw = canvas.create_window((0, 0), window=self.vocab_display, anchor='nw')
         self.vocab_display.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
         canvas.bind('<Configure>', lambda e: canvas.itemconfig(cw, width=e.width-30))
 
         # Content widgets
-        self.vocab_japanese = tk.Label(self.vocab_display, text='', font=('Helvetica', 48, 'bold'),
+        self.vocab_japanese = tk.Label(self.vocab_display, text='', font=L['font_vocab'],
                                        bg=self.colors['card_bg'], fg=self.colors['accent'])
         self.vocab_japanese.pack(pady=15)
 
@@ -595,21 +675,21 @@ class JapaneseTrainer(tk.Tk):
 
         tk.Label(self.example_frame, text='Example Sentence', font=('Helvetica', 10, 'bold'),
                  bg=self.colors['bg'], fg=self.colors['accent']).pack(pady=4)
-        self.example_jp = tk.Label(self.example_frame, text='', font=('Helvetica', 13),
-                                   bg=self.colors['bg'], fg=self.colors['fg'], wraplength=550)
+        self.example_jp = tk.Label(self.example_frame, text='', font=L['font_example_jp'],
+                                   bg=self.colors['bg'], fg=self.colors['fg'], wraplength=L['wraplength'])
         self.example_jp.pack(pady=4)
-        self.example_romaji = tk.Label(self.example_frame, text='', font=('Helvetica', 9, 'italic'),
-                                       bg=self.colors['bg'], fg=self.colors['accent'], wraplength=550)
+        self.example_romaji = tk.Label(self.example_frame, text='', font=L['font_example_romaji'],
+                                       bg=self.colors['bg'], fg=self.colors['accent'], wraplength=L['wraplength'])
         self.example_romaji.pack(pady=3)
         self.example_eng = tk.Label(self.example_frame, text='', font=('Helvetica', 9),
-                                    bg=self.colors['bg'], fg='gray', wraplength=550)
+                                    bg=self.colors['bg'], fg='gray', wraplength=L['wraplength'])
         self.example_eng.pack(pady=4)
 
-        # ── Typing test area ──
+        # Typing test area
         self.vocab_typing_frame = tk.Frame(self.vocab_display, bg=self.colors['card_bg'])
         tk.Label(self.vocab_typing_frame, text='Type the English meaning:', font=('Helvetica', 10),
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack(pady=8)
-        self.vocab_entry = tk.Entry(self.vocab_typing_frame, font=('Helvetica', 14), justify='center',
+        self.vocab_entry = tk.Entry(self.vocab_typing_frame, font=L['entry_font'], justify='center',
                                     bg='white', fg=self.colors['fg'], relief='solid', bd=2, state='disabled')
         self.vocab_entry.pack(pady=8, fill='x', padx=40)
 
@@ -617,17 +697,17 @@ class JapaneseTrainer(tk.Tk):
         vocab_btns.pack(pady=8)
         self.vocab_check_btn_typing = tk.Button(vocab_btns, text='Check', font=('Helvetica', 10, 'bold'),
                                                 bg=self.colors['success'], fg='white', activebackground='#006400',
-                                                relief='raised', bd=2, padx=18, pady=6, state='disabled',
+                                                relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'], state='disabled',
                                                 command=self.check_vocab_answer)
         self.vocab_check_btn_typing.pack(side='left', padx=4)
 
-        # ── Multiple-choice area ──
+        # Multiple-choice area
         self.vocab_mc_frame = tk.Frame(self.vocab_display, bg=self.colors['card_bg'])
 
-        # ── Common next button ──
+        # Common next button
         self.vocab_next_btn = tk.Button(self.vocab_display, text='Next', font=('Helvetica', 10, 'bold'),
                                         bg=self.colors['accent'], fg='white', activebackground='#004080',
-                                        relief='raised', bd=2, padx=18, pady=6,
+                                        relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'],
                                         command=self.next_vocab_card)
         self.vocab_next_btn.pack(pady=8)
 
@@ -737,17 +817,16 @@ class JapaneseTrainer(tk.Tk):
                  bg=self.colors['card_bg'], fg=self.colors['fg']).pack(pady=8)
 
         for ch in choices:
-            btn = tk.Button(self.vocab_mc_frame, text=ch, font=('Helvetica', 12, 'bold'),
+            btn = tk.Button(self.vocab_mc_frame, text=ch, font=self.layout['mc_btn_font'],
                             bg='white', fg=self.colors['fg'],
                             activebackground=self.colors['accent'], activeforeground='white',
                             relief='raised', bd=3, padx=18, pady=10, wraplength=380,
                             command=lambda c=ch: self.check_vocab_mc_answer(c))
-            btn.pack(pady=4, fill='x', padx=40)
+            btn.pack(pady=6, fill='x' if self.layout['mc_btn_width'] == 0 else 'none', padx=40 if self.layout['mc_btn_width'] == 0 else 0)
             self.vocab_mc_buttons.append(btn)
 
     def check_vocab_mc_answer(self, choice):
-        if self.vocab_answer_checked:
-            return
+        if self.vocab_answer_checked: return
         word, data = self.current_vocab
         correct = data['meaning']
         self.vocab_asked += 1
@@ -812,21 +891,22 @@ class JapaneseTrainer(tk.Tk):
 
     # ── GRAMMAR TAB ─────────────────────────────────────
     def init_grammar_tab(self):
+        L = self.layout
         self.current_pattern_index = 0
 
         header = tk.Frame(self.grammar_tab, bg=self.colors['accent'], height=60)
-        header.pack(fill='x', pady=(0, 5))
+        header.pack(fill='x', pady=(0, L['pady']))
         header.pack_propagate(False)
         tk.Label(header, text='Sentence Structure', font=('Helvetica', 16, 'bold'),
                  bg=self.colors['accent'], fg='white').pack(pady=15)
 
         nav = tk.Frame(self.grammar_tab, bg=self.colors['card_bg'], relief='raised', bd=2)
-        nav.pack(fill='x', padx=15, pady=5)
+        nav.pack(fill='x', padx=L['padx'], pady=L['pady'])
 
         tk.Button(nav, text='Previous', font=('Helvetica', 10, 'bold'),
                   bg=self.colors['btn_bg'], fg=self.colors['fg'],
                   activebackground=self.colors['accent'], activeforeground='white',
-                  relief='raised', bd=2, padx=18, pady=6,
+                  relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'],
                   command=self.prev_pattern).pack(side='left', padx=8, pady=8)
 
         self.pattern_label = tk.Label(nav, text='', font=('Helvetica', 11, 'bold'),
@@ -836,36 +916,37 @@ class JapaneseTrainer(tk.Tk):
         tk.Button(nav, text='Next', font=('Helvetica', 10, 'bold'),
                   bg=self.colors['btn_bg'], fg=self.colors['fg'],
                   activebackground=self.colors['accent'], activeforeground='white',
-                  relief='raised', bd=2, padx=18, pady=6,
+                  relief='raised', bd=2, padx=L['btn_padx'], pady=L['btn_pady'],
                   command=self.next_pattern).pack(side='right', padx=8, pady=8)
 
         canvas = tk.Canvas(self.grammar_tab, bg=self.colors['bg'], highlightthickness=0)
-        scrollbar = ttk.Scrollbar(self.grammar_tab, orient='vertical', command=canvas.yview)
+        scrollbar = ttk.Scrollbar(self.grammar_tab, orient='vertical', command=canvas.yview) if L['scrollbar'] else None
         self.grammar_content = tk.Frame(canvas, bg=self.colors['card_bg'])
 
-        canvas.configure(yscrollcommand=scrollbar.set)
-        scrollbar.pack(side='right', fill='y')
-        canvas.pack(side='left', fill='both', expand=True, padx=15, pady=5)
+        canvas.configure(yscrollcommand=scrollbar.set if scrollbar else None)
+        if scrollbar:
+            scrollbar.pack(side='right', fill='y')
+        canvas.pack(side='left', fill='both', expand=True, padx=L['padx'], pady=L['pady'])
 
         cw = canvas.create_window((0, 0), window=self.grammar_content, anchor='nw')
         self.grammar_content.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
         canvas.bind('<Configure>', lambda e: canvas.itemconfig(cw, width=e.width-30))
 
-        self.pattern_title = tk.Label(self.grammar_content, text='', font=('Helvetica', 16, 'bold'),
-                                      bg=self.colors['card_bg'], fg=self.colors['accent'], wraplength=650)
+        self.pattern_title = tk.Label(self.grammar_content, text='', font=L['font_pattern_title'],
+                                      bg=self.colors['card_bg'], fg=self.colors['accent'], wraplength=L['wraplength'])
         self.pattern_title.pack(pady=12)
-        self.pattern_romaji = tk.Label(self.grammar_content, text='', font=('Helvetica', 11, 'italic'),
-                                       bg=self.colors['card_bg'], fg=self.colors['accent'], wraplength=650)
+        self.pattern_romaji = tk.Label(self.grammar_content, text='', font=L['font_pattern_romaji'],
+                                       bg=self.colors['card_bg'], fg=self.colors['accent'], wraplength=L['wraplength'])
         self.pattern_romaji.pack(pady=4)
-        self.pattern_meaning = tk.Label(self.grammar_content, text='', font=('Helvetica', 11),
-                                        bg=self.colors['card_bg'], fg=self.colors['success'], wraplength=650)
+        self.pattern_meaning = tk.Label(self.grammar_content, text='', font=L['font_pattern_meaning'],
+                                        bg=self.colors['card_bg'], fg=self.colors['success'], wraplength=L['wraplength'])
         self.pattern_meaning.pack(pady=6)
 
         explain_frame = tk.Frame(self.grammar_content, bg=self.colors['bg'], relief='sunken', bd=2)
         explain_frame.pack(fill='x', padx=20, pady=12)
         tk.Label(explain_frame, text='Explanation', font=('Helvetica', 11, 'bold'),
                  bg=self.colors['bg'], fg=self.colors['accent']).pack(pady=6)
-        self.pattern_explanation = tk.Label(explain_frame, text='', font=('Helvetica', 10),
+        self.pattern_explanation = tk.Label(explain_frame, text='', font=L['font_explanation'],
                                            bg=self.colors['bg'], fg=self.colors['fg'],
                                            justify='left', wraplength=600)
         self.pattern_explanation.pack(padx=15, pady=8)
@@ -893,13 +974,13 @@ class JapaneseTrainer(tk.Tk):
             card = tk.Frame(self.examples_frame, bg='white', relief='raised', bd=2)
             card.pack(fill='x', padx=20, pady=10)
 
-            tk.Label(card, text=f"Example {i}", font=('Helvetica', 10, 'bold'),
+            tk.Label(card, text=f"Example {i}", font=self.layout['font_example_label'],
                      bg=self.colors['btn_bg'], fg=self.colors['fg']).pack(fill='x', pady=(0, 5))
-            tk.Label(card, text=ex['jp'], font=('Helvetica', 16, 'bold'),
+            tk.Label(card, text=ex['jp'], font=self.layout['font_example_jp'],
                      bg='white', fg=self.colors['fg']).pack(pady=5, padx=15)
-            tk.Label(card, text=ex['romaji'], font=('Helvetica', 11, 'italic'),
+            tk.Label(card, text=ex['romaji'], font=self.layout['font_example_romaji'],
                      bg='white', fg=self.colors['accent']).pack(pady=3, padx=15)
-            tk.Label(card, text=f"→ {ex['eng']}", font=('Helvetica', 11),
+            tk.Label(card, text=f"→ {ex['eng']}", font=self.layout['font_example_eng'],
                      bg='white', fg='gray').pack(pady=5, padx=15)
 
     def next_pattern(self):

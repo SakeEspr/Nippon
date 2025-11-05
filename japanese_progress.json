@@ -12,5 +12,6 @@
     "wrong": []
   },
   "test_type": "multiple_choice",
-  "current_theme": "Ocean"
+  "current_theme": "Ocean",
+  "device_mode": "Computer"
 }
