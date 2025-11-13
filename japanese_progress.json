@@ -13,5 +13,919 @@
   },
   "test_type": "multiple_choice",
   "current_theme": "Ocean",
-  "device_mode": "Computer"
+  "device_mode": "Computer",
+  "settings": {
+    "theme": "Ocean Whisper",
+    "layout": "Desktop",
+    "sound": true,
+    "test_type": "multiple_choice",
+    "srs_interval": 1
+  },
+  "stats": {
+    "total_reviews": 121,
+    "reviews_today": 111,
+    "correct_streak": 0,
+    "max_streak": 92
+  },
+  "achievements": [
+    "first_review",
+    "perfect_10"
+  ],
+  "streak": 2,
+  "last_date": "2025-11-13",
+  "kana": {
+    "フ": {
+      "ease": 2.8000000000000003,
+      "interval": 16,
+      "repetitions": 3,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-29",
+      "wrong_count": 0
+    },
+    "く": {
+      "ease": 2.7,
+      "interval": 6,
+      "repetitions": 2,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-19",
+      "wrong_count": 0
+    },
+    "め": {
+      "ease": 2.7,
+      "interval": 6,
+      "repetitions": 2,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-19",
+      "wrong_count": 0
+    },
+    "ん": {
+      "ease": 2.7,
+      "interval": 6,
+      "repetitions": 2,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-19",
+      "wrong_count": 0
+    },
+    "ヌ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "わ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "ホ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ゆ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ナ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "チ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ケ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ハ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ン": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ラ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "の": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ヒ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "と": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "せ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ろ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "モ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ぬ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "か": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "レ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ま": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ヘ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ヨ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ソ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "そ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ヤ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ネ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ト": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "は": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ち": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ル": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "な": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "を": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ヲ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "お": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "え": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "さ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ほ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ニ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ロ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "り": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "オ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "メ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ム": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "タ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "れ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "て": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ツ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "し": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ね": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "サ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "リ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ノ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "シ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "よ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "き": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ミ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "キ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "こ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ワ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "コ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "け": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "や": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "イ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ひ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ユ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "エ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "う": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "セ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ふ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "も": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ス": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "に": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "た": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ク": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "す": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ウ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "る": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "つ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "み": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "む": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "テ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "あ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "へ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ア": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "マ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ら": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "い": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "カ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    }
+  },
+  "vocab": {
+    "ありがとう": {
+      "ease": 2.7,
+      "interval": 6,
+      "repetitions": 2,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-19",
+      "wrong_count": 0
+    },
+    "おはよう": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-12",
+      "next_review": "2025-11-13",
+      "wrong_count": 0
+    },
+    "こんにちは": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "きらい": {
+      "ease": 2.7,
+      "interval": 6,
+      "repetitions": 2,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-19",
+      "wrong_count": 0
+    },
+    "がくせい": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ちいさい": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "おおきい": {
+      "ease": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "のむ": {
+      "ease": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "すき": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "あたらしい": {
+      "ease": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "いえ": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "たべる": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ともだち": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ふるい": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "すみません": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "くる": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    },
+    "ほん": {
+      "ease": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    },
+    "がっこう": {
+      "ease": 2.6,
+      "interval": 1,
+      "repetitions": 1,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 0
+    }
+  },
+  "grammar": {},
+  "kanji": {
+    "七": {
+      "ease": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "last_review": "2025-11-13",
+      "next_review": "2025-11-14",
+      "wrong_count": 1
+    }
+  }
 }
